@@ -12,7 +12,7 @@ private final JTextField textField;
 
 @Override
     public void actionPerformed(ActionEvent e) {
-    boolean dot = false;
+
         char lastChar='q';
         JButton jButton=(JButton) e.getSource();
         StringBuilder stringBuilder= new StringBuilder(textField.getText());

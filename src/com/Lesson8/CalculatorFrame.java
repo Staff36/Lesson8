@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CalculatorFrame extends JFrame {
-
+    boolean error;
     public CalculatorFrame() {
         //Создание объектов
         setTitle("Calculator");
@@ -121,7 +121,7 @@ public class CalculatorFrame extends JFrame {
     }
 
     private double calculate(String outputValue) {
-
+        error=false;
         if (outputValue.charAt(0)=='-')
             outputValue="0"+outputValue;
         if (!outputValue.contains("+") && !outputValue.contains("-") && !outputValue.contains("*") && !outputValue.contains("/")) {
@@ -162,7 +162,8 @@ public class CalculatorFrame extends JFrame {
                 double right = calculate(rightSide);
 
                 if (right == 0) //if denominator is zero
-                { throw new ArithmeticException("illegal denominator");
+                {   error=true;
+                    return 0;
 
                 } else {
                     result = calculate(leftSide) / right;
@@ -173,6 +174,7 @@ public class CalculatorFrame extends JFrame {
         return result;
     }
     private String getSolution(JTextField outputField){
+        if (error) return "Err";
         return String.valueOf(calculate(outputField.getText()));
     }
     private void putDotInField(JTextField outputField){
